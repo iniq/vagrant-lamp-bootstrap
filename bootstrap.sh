@@ -2,10 +2,6 @@
 
 # Use single quotes instead of double quotes to make it work with special-character passwords
 PASSWORD='12345678'
-PROJECTFOLDER='myproject'
-
-# create project folder
-sudo mkdir "/var/www/html/${PROJECTFOLDER}"
 
 # update / upgrade
 sudo apt-get update
@@ -14,6 +10,7 @@ sudo apt-get -y upgrade
 # install apache 2.5 and php 5.5
 sudo apt-get install -y apache2
 sudo apt-get install -y php5
+sudo apt-get install -y php5-cli
 
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
@@ -33,8 +30,8 @@ sudo apt-get -y install phpmyadmin
 # setup hosts file
 VHOST=$(cat <<EOF
 <VirtualHost *:80>
-    DocumentRoot "/var/www/html/${PROJECTFOLDER}"
-    <Directory "/var/www/html/${PROJECTFOLDER}">
+    DocumentRoot "/vagrant"
+    <Directory "/vagrant">
         AllowOverride All
         Require all granted
     </Directory>
@@ -55,3 +52,5 @@ sudo apt-get -y install git
 # install Composer
 curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
+(cd /vagrant && /usr/local/bin/composer update)
+echo 'PATH=$PATH:/vagrant/vendor/bin' >> ~vagrant/.profile
