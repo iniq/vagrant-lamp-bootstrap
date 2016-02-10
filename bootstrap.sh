@@ -53,4 +53,4 @@ sudo apt-get -y install git
 curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 (cd /vagrant && /usr/local/bin/composer update)
-echo 'PATH=$PATH:/vagrant/vendor/bin' >> ~vagrant/.profile
+echo 'PATH=$PATH:/vagrant/vendor/phpunit/phpunit/composer/bin' >> ~vagrant/.profile

@@ -1,39 +1,31 @@
-# vagrant-lamp-bootstrap
+# Agile Engineering PHP Vagrant Box
+A simple box to run PHP code and tests for the 2016 Agile Engineering training
 
-A super-simple Vagrantfile / bootstrap.sh to setup a LAMP stack inside Vagrant 100% automatically.
+## Install
 
-### Whaaaaat ?
+* Clone this repo
+* Run `vagrant up` before the session (it downloads a box, so you'll want to do it on fast internet with time to spare)
 
-This is a reduced-to-the-max Vagrant setup file for a quick development stack. It will:
+## Running PHP
 
-* setup a Ubuntu 14.04 LTS "Trustry Thar" 64bit box
+You can run PHP code either from the browser or from the command line. There's a sample file `index.php` to try it with.
 
-* make the box accessable by the host at IP `192.168.33.22`
+### Command Line
 
-* sync the current folder with `/var/www/html` inside the box
+From the `/vagrant` directory, run:
+`php index.php`
 
-* automatically perform all the commands in bootstrap.sh directly after setting up the box for the first time
+### Browser
 
-The bootstrap.sh will:
+In your browser, go to: [http://192.168.33.22](http://192.168.33.22)
 
-* update, upgrade
+## Running Tests
 
-* create a folder inside /var/www/html
+PHPUnit is installed for you. It expects files in the `/vagrant` directory.
+You can find the documentation for the version installed (3.7) [here](https://phpunit.de/manual/3.7/en/writing-tests-for-phpunit.html)
 
-* install apache 2.4, php 5.5, MySQL, PHPMyAdmin, git and Composer
+From the `/vagrant` directory, run:
+`phpunit`
 
-* also setting a pre-chosen password for MySQL and PHPMyAdmin
-
-* activate mod_rewrite and add *AllowOverride All* to the vhost settings
-
-You can folder and password inside the bootstrap.sh for sure.
-
-### How to use ?
-
-Put `Vagrantfile` and `bootstrap.sh` inside a folder and do a `vagrant up` on the command line.
-This box uses Ubuntu 14.04 LTS "Trustry Thar" 64bit, so if you don't have the basic box already, do a 
-`vagrant box add ubuntu/trusty64` before.
-
-### Why ?
-
-This is just my personal time-saving bootstrap for Vagrant, it might be useful for you too.
+To run the sample test, from the `/vagrant` directory run:
+`phpunit SampleTest`
